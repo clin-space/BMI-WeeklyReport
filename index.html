@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周报归档 · Weekly Research Archive</title>
+<style>
+  :root {
+    --bg: #faf9f5; --panel: #ffffff; --text: #1f1e1d; --muted: #6e6a63; --soft: #8a8579;
+    --accent: #d97757; --accent-dark: #b85c38; --line: #e8e6e0;
+    --serif: "Georgia", "Times New Roman", "Songti SC", "STSong", "Noto Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: var(--sans); color: var(--text);
+    background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-dark); text-decoration: none; }
+  header {
+    padding: 64px 24px 40px; text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #fdfcfa, var(--bg));
+  }
+  header .kicker {
+    font-family: var(--serif); font-style: italic; color: var(--accent); letter-spacing: 1px; font-size: 14px;
+  }
+  header h1 { font-family: var(--serif); font-weight: 600; margin: 10px 0 8px; font-size: 36px; color: #141310; }
+  header .sub { color: var(--soft); font-size: 15px; }
+  .stats { display: flex; justify-content: center; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 30px; min-width: 130px; box-shadow: 0 1px 2px rgba(30,25,15,.04);
+  }
+  .stat .num { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--accent); }
+  .stat .label { font-size: 13px; color: var(--muted); }
+  main { max-width: 760px; margin: 0 auto; padding: 36px 20px 80px; }
+  h2 {
+    font-family: var(--serif); font-weight: 600; font-size: 22px; color: #141310;
+    margin: 12px 0 18px; padding-left: 14px; border-left: 4px solid var(--accent);
+  }
+  .week-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 22px; margin-bottom: 12px; color: var(--text);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  a.week-card:hover { border-color: var(--accent); box-shadow: 0 3px 14px rgba(217,119,87,.12); }
+  .card-title { font-size: 17px; font-weight: 600; color: #1f1e1d; }
+  .card-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .card-count { font-size: 13px; color: var(--soft); margin-top: 4px; }
+  .arrow { font-family: var(--serif); font-size: 22px; color: var(--accent); }
+  .week-card.muted { opacity: .6; }
+  .empty { color: var(--muted); }
+  footer { text-align: center; padding: 24px; color: var(--soft); font-size: 13px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Weekly Research Landscape</div>
+  <h1>周报归档</h1>
+  <div class="sub">光计算 · 波前调控 · 衍射神经网络</div>
+  <div class="stats">
+    <div class="stat"><span class="num">1</span><span class="label">已发布期数</span></div>
+    <div class="stat"><span class="num">13</span><span class="label">累计论文</span></div>
+  </div>
+</header>
+<main>
+  <h2>全部周报</h2>
+  <a class="week-card" href="2026-08-23.html"><div class="card-title">光计算与波前调控周报</div><div class="card-sub">2026-W34 · 2026-08-23</div><div class="card-count">13 篇论文</div><span class="arrow">→</span></a>
+</main>
+<footer>由 OpenClaw 自动生成 · 每周更新</footer>
+</body>
+</html>
