@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>光计算与波前调控周报</title>
+<style>
+  :root {
+    --bg: #faf9f5; --panel: #ffffff; --card: #ffffff;
+    --text: #1f1e1d; --muted: #6e6a63; --soft: #8a8579;
+    --accent: #d97757; --accent-dark: #b85c38; --line: #e8e6e0; --line2: #eeece6;
+    --serif: "Georgia", "Times New Roman", "Songti SC", "STSong", "Noto Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: var(--sans); color: var(--text);
+    background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header {
+    padding: 56px 24px 36px; text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #fdfcfa, var(--bg));
+  }
+  header .kicker {
+    font-family: var(--serif); font-style: italic; color: var(--accent);
+    letter-spacing: 1px; font-size: 14px;
+  }
+  header h1 {
+    font-family: var(--serif); font-weight: 600;
+    margin: 10px 0 6px; font-size: 34px; color: #141310;
+  }
+  header .sub { color: var(--soft); font-size: 14px; }
+
+  nav.top {
+    display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+    margin-top: 22px; font-size: 14px;
+  }
+  nav.top a { color: var(--muted); }
+  nav.top a:hover { color: var(--accent-dark); }
+
+  .stats {
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 30px; min-width: 128px;
+    box-shadow: 0 1px 2px rgba(30,25,15,.04);
+  }
+  .stat .num { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--accent); }
+  .stat .label { font-size: 13px; color: var(--muted); }
+
+  main { max-width: 880px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    color: #141310; margin: 40px 0 16px; padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .prose { color: #3b3833; }
+
+  .badge {
+    display: inline-block; font-size: 11px; color: var(--accent-dark);
+    background: #f7ede8; border: 1px solid #eed9cd;
+    border-radius: 999px; padding: 1px 9px;
+    white-space: nowrap;
+  }
+
+  /* 折叠论文卡片 */
+  details.paper {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; margin-bottom: 14px; overflow: hidden;
+    scroll-margin-top: 20px;
+  }
+  details.paper summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+    transition: background .15s;
+  }
+  details.paper summary::-webkit-details-marker { display: none; }
+  details.paper summary:hover { background: #fbfaf6; }
+  details.paper[open] summary { border-bottom: 1px solid var(--line2); }
+  .paper-no {
+    font-family: var(--serif); font-size: 14px; font-weight: 600;
+    color: var(--accent); min-width: 24px; flex: none;
+  }
+  .paper-main { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .paper-title { font-weight: 600; font-size: 16px; color: #1f1e1d; }
+  .paper-line { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .paper-line .dot { color: var(--soft); font-size: 12px; }
+  .paper-venue { font-size: 12.5px; color: var(--accent-dark); font-weight: 500; }
+  .paper-authors { font-size: 12.5px; color: var(--muted); }
+  .paper-sum { font-size: 13px; color: var(--muted); }
+  .chevron {
+    flex: none; color: var(--soft); font-size: 14px;
+    transition: transform .2s ease;
+  }
+  details.paper[open] .chevron { transform: rotate(180deg); }
+
+  .paper-body { padding: 16px 20px 18px; }
+  .paper-body .meta { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+  .paper-body .authors { color: #5c5750; font-size: 13px; margin-bottom: 10px; }
+  .paper-body .contrib, .paper-body .sig { font-size: 14px; color: #3b3833; margin-bottom: 6px; }
+  .paper-body .contrib strong, .paper-body .sig strong { color: var(--accent-dark); }
+  .paper-body .kw { font-size: 13px; color: var(--soft); margin-top: 8px; }
+  .paper-body .src { margin-top: 8px; font-size: 13px; }
+
+  .empty { color: var(--muted); }
+
+  footer {
+    text-align: center; padding: 24px; color: var(--soft); font-size: 13px;
+    border-top: 1px solid var(--line);
+  }
+  footer a { color: var(--accent-dark); }
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Weekly Research Landscape</div>
+  <h1>光计算与波前调控周报</h1>
+  <div class="sub">2026-W36 · 2026-09-06</div>
+  <nav class="top">
+    <a href="#overview">本期概览</a>
+    <a href="#papers">论文列表</a>
+    <a href="index.html">← 全部周报</a>
+  </nav>
+  <div class="stats"><div class="stat"><span class="num">5</span><span class="label">本周论文</span></div><div class="stat"><span class="num">2</span><span class="label">活跃期刊</span></div></div>
+</header>
+<main>
+  <section id="overview">
+    <h2>本期概览</h2>
+    <div class="prose">本期（2026-W36，8月31日—9月6日）汇总光计算、波前调控与衍射神经网络三个方向共 5 篇代表性论文。光计算方向聚焦两条突破线性瓶颈的路线：随机映射强度光学神经网络（RMI-ONN）突破传统级联线性 ONN 的 rank-one 二次决策边界限制，以及仅用线性元件实现的结构非线性光学储备池计算；波前调控方向涵盖基于空间纠缠光子对的非局域波前整形，以及 OAM 结构光在实空间直接写入的 Floquet 拓扑；衍射神经网络方向推出波长复用的全彩散射介质成像 DNN，实现多光谱并行重建。</div>
+    <h2>趋势判断</h2>
+    <div class="prose">三大趋势值得关注：其一，光计算正从「级联线性元件」走向「随机映射 + 结构非线性」，利用无序介质高维投影与波前整形二次交互突破线性瓶颈，向低功耗、直接光场计算演进；其二，波前整形从「局域主动校正」向「非局域（纠缠光子）」与「结构光（OAM）拓扑调控」两个方向扩展，物理上把波前校正与散射介质解耦，为紧凑/不可达系统成像铺路；其三，衍射神经网络从单波长任务走向波长复用与散射介质全彩成像，多光谱通道完全独立并行，标志 D2NN 向多模态、多光谱并行计算延伸。</div>
+  </section>
+
+  <section id="papers">
+    <h2>论文列表</h2>
+    <details class="paper" id="paper-1"><summary class="paper-head"><span class="paper-no">01</span><span class="paper-main"><span class="paper-title">Random-mapped intensity optical neural network: all-optical two-layer computing for multimodal optical-field inference</span><span class="paper-line"><span class="badge">光计算</span><span class="dot">·</span><span class="paper-venue">arXiv</span><span class="dot">·</span><span class="paper-authors">Gi-Hyun Go, Doeon Lee, Gookho Song, Mooseok Jang</span></span><span class="paper-sum">提出随机映射强度光学神经网络（RMI-ONN），突破传统级联线性光学神经网络受平方律检测约束的 rank-one 二次决策边界。通过无序介质的…</span></span><span class="chevron">▾</span></summary><div class="paper-body"><div class="meta">2026-09-02 · arXiv</div><div class="authors">Gi-Hyun Go; Doeon Lee; Gookho Song; Mooseok Jang</div><div class="contrib"><strong>核心贡献：</strong>提出随机映射强度光学神经网络（RMI-ONN），突破传统级联线性光学神经网络受平方律检测约束的 rank-one 二次决策边界。通过无序介质的高维特征投影、可编程非负强度掩模与分段空间功率求和三者结合，实现更高秩的二次决策边界。实验在单一光路配置下，对 MNIST、Fashion-MNIST、Quick Draw 数据集完成振幅、相位、偏振的多模态分类。</div><div class="sig"><strong>为什么值得看：</strong>为直接光场处理器提供可扩展的新框架，统一在强度检测框架下同时利用振幅、相位与偏振信息，突破线性 ONN 的表达能力瓶颈。</div><div class="kw">关键词：光学神经网络 · 随机映射 · 全光计算 · 多模态光场</div><div class="src"><a href="https://arxiv.org/abs/2609.02698" target="_blank" rel="noopener">查看原文 ↗</a></div></div></details><details class="paper" id="paper-2"><summary class="paper-head"><span class="paper-no">02</span><span class="paper-main"><span class="paper-title">Optical Reservoir Computing with Structural Nonlinearity for Forecasting Chaotic Time Series</span><span class="paper-line"><span class="badge">光计算</span><span class="dot">·</span><span class="paper-venue">arXiv</span><span class="dot">·</span><span class="paper-authors">Leandro R. Venâncio, Jonathan Dong, Mickael Mounaix, Jacopo Bertolotti</span></span><span class="paper-sum">在光学储备池计算中引入结构非线性，仅用线性元件实现非线性运算。数字微镜器件（DMD）作为可重构散射势，光在散射介质中的传播提供高维模式混合，再…</span></span><span class="chevron">▾</span></summary><div class="paper-body"><div class="meta">2026-09-02 · arXiv</div><div class="authors">Leandro R. Venâncio; Jonathan Dong; Mickael Mounaix; Jacopo Bertolotti</div><div class="contrib"><strong>核心贡献：</strong>在光学储备池计算中引入结构非线性，仅用线性元件实现非线性运算。数字微镜器件（DMD）作为可重构散射势，光在散射介质中的传播提供高维模式混合，再通过波前整形器的二次作用获得输入的二次映射。在 Mackey-Glass 混沌时间序列预测上，结构非线性储备池提升了短期预测精度并更好地保持长期动力学。</div><div class="sig"><strong>为什么值得看：</strong>证明结构非线性可提升低功耗光计算的预测能力，无需强光物质相互作用即可实现非线性，为高速低能耗光计算提供新路径。</div><div class="kw">关键词：光学储备池计算 · 结构非线性 · 散射介质 · 混沌时间序列</div><div class="src"><a href="https://arxiv.org/abs/2609.02733" target="_blank" rel="noopener">查看原文 ↗</a></div></div></details><details class="paper" id="paper-3"><summary class="paper-head"><span class="paper-no">03</span><span class="paper-main"><span class="paper-title">Nonlocal wavefront shaping through complex media</span><span class="paper-line"><span class="badge">波前调控</span><span class="dot">·</span><span class="paper-venue">arXiv</span><span class="dot">·</span><span class="paper-authors">Yanis Trouyet, Neelan Gounden, Pedro Ornelas, Patrick Cameron, Andrew Forbes, Hugo Defienne</span></span><span class="paper-sum">实验演示非局域波前整形：利用空间纠缠光子对，对从不与散射介质相互作用的光子施加相位校正，补偿其纠缠伙伴经历的畸变并恢复初始空间关联。该方法物理…</span></span><span class="chevron">▾</span></summary><div class="paper-body"><div class="meta">2026-09-01 · arXiv</div><div class="authors">Yanis Trouyet; Neelan Gounden; Pedro Ornelas; Patrick Cameron; Andrew Forbes; Hugo Defienne</div><div class="contrib"><strong>核心贡献：</strong>实验演示非局域波前整形：利用空间纠缠光子对，对从不与散射介质相互作用的光子施加相位校正，补偿其纠缠伙伴经历的畸变并恢复初始空间关联。该方法物理上把波前校正与散射介质解耦，无需空间光调制器或变形镜直接置于散射光路中。</div><div class="sig"><strong>为什么值得看：</strong>为紧凑乃至物理上不可达系统中的散射介质成像与光通信开辟新途径，突破传统波前整形必须「局域」放置校正元件的限制。</div><div class="kw">关键词：波前整形 · 散射介质 · 量子纠缠 · 非局域校正</div><div class="src"><a href="https://arxiv.org/abs/2609.01017" target="_blank" rel="noopener">查看原文 ↗</a></div></div></details><details class="paper" id="paper-4"><summary class="paper-head"><span class="paper-no">04</span><span class="paper-main"><span class="paper-title">Real-space Floquet topology written by the orbital angular momentum of light</span><span class="paper-line"><span class="badge">波前调控</span><span class="dot">·</span><span class="paper-venue">arXiv</span><span class="dot">·</span><span class="paper-authors">Mohammad Shafiei, Milorad V. Milošević</span></span><span class="paper-sum">展示携带轨道角动量（OAM）的结构光可在实空间直接写入拓扑。对超薄拓扑绝缘体薄膜，圆偏振拉盖尔-高斯光束产生径向 Floquet 质量，其符号…</span></span><span class="chevron">▾</span></summary><div class="paper-body"><div class="meta">2026-09-03 · arXiv</div><div class="authors">Mohammad Shafiei; Milorad V. Milošević</div><div class="contrib"><strong>核心贡献：</strong>展示携带轨道角动量（OAM）的结构光可在实空间直接写入拓扑。对超薄拓扑绝缘体薄膜，圆偏振拉盖尔-高斯光束产生径向 Floquet 质量，其符号变化定义由两个同心手性环模界定的拓扑环。光子 OAM 量子数可在不改变频率、强度、螺旋性的前提下移动并重塑该拓扑环，成为非平衡拓扑的控制参数。</div><div class="sig"><strong>为什么值得看：</strong>确立光子 OAM 作为非平衡拓扑的独立调控自由度，为量子材料中可编程拓扑景观提供新途径。</div><div class="kw">关键词：轨道角动量 · Floquet 工程 · 拓扑绝缘体 · 结构光</div><div class="src"><a href="https://arxiv.org/abs/2609.03752" target="_blank" rel="noopener">查看原文 ↗</a></div></div></details><details class="paper" id="paper-5"><summary class="paper-head"><span class="paper-no">05</span><span class="paper-main"><span class="paper-title">Full-colour imaging behind a glass diffuser through a diffractive neural network with multi-wavelength channels</span><span class="paper-line"><span class="badge">d2nn</span><span class="dot">·</span><span class="paper-venue">npj Unconventional Computing</span><span class="dot">·</span><span class="paper-authors">Ikuo Hoshi, Koki Wakunami, Yasuyuki Ichihashi, Ryutaro Oi</span></span><span class="paper-sum">针对传统衍射神经网络（DNN）仅针对单波长设计、难以重建散射介质后多波长物体的局限，提出由体全息光学元件构成的波长复用 DNN。多波长通道完全…</span></span><span class="chevron">▾</span></summary><div class="paper-body"><div class="meta">2026-09-02 · npj Unconventional Computing</div><div class="authors">Ikuo Hoshi; Koki Wakunami; Yasuyuki Ichihashi; Ryutaro Oi</div><div class="contrib"><strong>核心贡献：</strong>针对传统衍射神经网络（DNN）仅针对单波长设计、难以重建散射介质后多波长物体的局限，提出由体全息光学元件构成的波长复用 DNN。多波长通道完全独立并行，实现散射介质（如玻璃扩散片）后物体的多光谱全彩重建。</div><div class="sig"><strong>为什么值得看：</strong>将衍射神经网络从单波长扩展到多波长并行，实现散射介质后的全彩成像，推动 DNN 在多光谱成像中的实用化。</div><div class="kw">关键词：衍射神经网络 · 波长复用 · 散射成像 · 体全息光学元件</div><div class="src"><a href="https://doi.org/10.1038/s44335-026-00096-y" target="_blank" rel="noopener">查看原文 ↗</a></div></div></details>
+  </section>
+</main>
+<footer>
+  <a href="index.html">查看全部周报归档</a> · 由 OpenClaw 自动生成
+</footer>
+</body>
+</html>
