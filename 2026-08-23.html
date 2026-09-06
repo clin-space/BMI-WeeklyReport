@@ -65,16 +65,6 @@
   }
   .prose { color: #3b3833; }
 
-  .theme {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 12px; padding: 12px 18px; margin-bottom: 10px;
-  }
-  .theme-head { display: flex; justify-content: space-between; margin-bottom: 8px; }
-  .theme-name { font-weight: 600; }
-  .theme-count { color: var(--muted); font-size: 13px; }
-  .bar { height: 8px; background: #f0ede6; border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
-
   .badge {
     display: inline-block; font-size: 11px; color: var(--accent-dark);
     background: #f7ede8; border: 1px solid #eed9cd;
@@ -138,11 +128,10 @@
   <div class="sub">2026-W34 · 2026-08-23</div>
   <nav class="top">
     <a href="#overview">本期概览</a>
-    <a href="#themes">主题分布</a>
     <a href="#papers">论文列表</a>
     <a href="index.html">← 全部周报</a>
   </nav>
-  <div class="stats"><div class="stat"><span class="num">13</span><span class="label">本周论文</span></div><div class="stat"><span class="num">3</span><span class="label">活跃期刊</span></div><div class="stat"><span class="num">3</span><span class="label">研究主题</span></div></div>
+  <div class="stats"><div class="stat"><span class="num">13</span><span class="label">本周论文</span></div><div class="stat"><span class="num">3</span><span class="label">活跃期刊</span></div></div>
 </header>
 <main>
   <section id="overview">
@@ -150,11 +139,6 @@
     <div class="prose">本期汇总了光计算、波前调控与衍射神经网络三个方向共 13 篇代表性论文，覆盖 arXiv、Journal of the European Optical Society 等来源。光计算方向聚焦光子储备池计算、VCSEL 偏振编码、衍射光学处理器理论框架与光子记忆；波前调控方向涵盖太赫兹波前整形、散射介质波前整形的距离边界、低成本 OAM 转移与时空超构表面；衍射神经网络方向关注量子极限成像新架构。</div>
     <h2>趋势判断</h2>
     <div class="prose">两大趋势值得关注：一是光子储备池计算、光子记忆等&#x27;存算一体的光计算&#x27;正从器件走向通信与类脑计算的实用化；二是波前整形技术从静态散射介质向超快时域（时空超构表面、flying-focus THz）和低成本化（印刷衍射光学）两个方向扩展。衍射光学神经网络则开始与量子极限成像结合，标志着 D2NN 从经典推理向量子测量边界延伸。</div>
-  </section>
-
-  <section id="themes">
-    <h2>研究主题分布</h2>
-    <div class="theme"><div class="theme-head"><span class="theme-name">光计算</span><span class="theme-count">6 篇</span></div><div class="bar"><div class="bar-fill" style="width:46%"></div></div></div><div class="theme"><div class="theme-head"><span class="theme-name">波前调控</span><span class="theme-count">6 篇</span></div><div class="bar"><div class="bar-fill" style="width:46%"></div></div></div><div class="theme"><div class="theme-head"><span class="theme-name">d2nn</span><span class="theme-count">1 篇</span></div><div class="bar"><div class="bar-fill" style="width:8%"></div></div></div>
   </section>
 
   <section id="papers">
